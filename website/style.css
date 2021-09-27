@@ -8,8 +8,8 @@ body{
     grid-auto-rows: minmax(150px, auto);
     /* grid-template-columns:  */
     height:100vh;
-    background: #f23557;
-    color: #f0d43a;
+    background: #27758d;
+    color: #e7e6e0;
     justify-content: center;
     grid-gap: 1em;
     font-size: 20px;
@@ -57,18 +57,18 @@ input{
     display:block;
     height: 60px;
     width: 320px;
-    background:#22b2da;
-    color: #f0d43a;
+    background:#95ddf1;
+    color:  #e7e6e0;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
     border: none;
 }
 
 button{
-    width: 400px;
-    height: 100px;
-    background: #3b4a6b;
-    color: #f0d43a;
+    width: 300px;
+    height: 70px;
+    background: #6d7548;
+    color:  #e7e6e0;
     font-size: 26px;
     font-family: 'Oswald', sans-serif;
     border: none;
