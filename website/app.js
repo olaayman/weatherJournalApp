@@ -2,7 +2,8 @@
 //let baseURL = 'http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=';
 let baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip='
 //let baseURL = 'api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=';
-let apiKey = ',us&appid=079adbbab8cb0665dd4bcef8573e9a9a';
+//let apiKey = ',us&appid=079adbbab8cb0665dd4bcef8573e9a9a';
+const apiKey = ",us&appid=079adbbab8cb0665dd4bcef8573e9a9a&units=metric";
 let UserResponse = '';
 
 // Create a new date instance dynamically with JS
@@ -17,7 +18,10 @@ function onGenerateClick(e){
     //get the values og the user entry as the zip id for the API and the feeling about the weather
     UserResponse =  document.getElementById('feelings').value;
     const zipId = document.getElementById('zip').value;
-
+    if (zipId == ''){
+      alert("please enter Zip code for the city!");
+    }
+    else{
     //call the async function to Acquire API credentials from OpenWeatherMap website 
     getTheWeather(baseURL , zipId,apiKey)
     .then(function(weatherData){
@@ -27,7 +31,7 @@ function onGenerateClick(e){
         //update the UI with the new data
         updateUI();
     })
-
+  }
 }
 
 //async function to to Acquire API credentials from OpenWeatherMap website
@@ -74,7 +78,7 @@ async function postData(url = '', data = {}) {
       console.log(UIData);
       //set the HTML text in the index file with the data retrived from the server
       document.getElementById('date').innerHTML = "the date is:  " + UIData.date;
-      document.getElementById('temp').innerHTML = "the temperature is:  " + UIData.temperature;
+      document.getElementById('temp').innerHTML = "the temperature is:  " + UIData.temperature + " Celcius";
       document.getElementById('content').innerHTML = "the user feeling is:  " + UIData.user_response;
       return UIData ;
   
