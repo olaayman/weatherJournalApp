@@ -1,6 +1,8 @@
 /* Global Variables */
-let baseURL = 'http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=';
-let apiKey = 'ea95ac7f7f17f9b713074d3efed22cf7';
+//let baseURL = 'http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=';
+let baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip='
+//let baseURL = 'api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=';
+let apiKey = ',us&appid=079adbbab8cb0665dd4bcef8573e9a9a';
 let UserResponse = '';
 
 // Create a new date instance dynamically with JS
@@ -19,7 +21,7 @@ function onGenerateClick(e){
     //call the async function to Acquire API credentials from OpenWeatherMap website 
     getTheWeather(baseURL , zipId,apiKey)
     .then(function(weatherData){
-        const temp = weatherData.list[0].main.temp; 
+        const temp = weatherData.main.temp; 
         // post the weatherdata to the server by chainning the promises
         postData('/post', { temperature: temp , date : newDate , user_response : UserResponse });
         //update the UI with the new data
@@ -31,9 +33,12 @@ function onGenerateClick(e){
 //async function to to Acquire API credentials from OpenWeatherMap website
 async function getTheWeather(baseURL , zipId , key){
 
-  const res = await fetch(baseURL + zipId + key);
+  console.log(baseURL+zipId+key);
+  const res = await fetch(baseURL+zipId+key);
+  console.log(res);
   try {
     const weatherData = await res.json();
+    console.log(weatherData);
     return weatherData ;
 
   }  catch(error) {
@@ -46,15 +51,15 @@ async function postData(url = '', data = {}) {
     
     const response = await fetch(url, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      //mode: 'cors', // no-cors, *cors, same-origin
+      //cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
       credentials: 'same-origin', // include, *same-origin, omit
       headers: {
         'Content-Type': 'application/json'
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      //redirect: 'follow', // manual, *follow, error
+      //referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       body: JSON.stringify(data) // body data type must match "Content-Type" header
     });
     return response.json(); // parses JSON response into native JavaScript objects

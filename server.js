@@ -20,7 +20,7 @@ app.use(express.static('website'));
 
 
 // Setup Server
-const port = 8080;
+const port = 8000;
 function serverListener(){
     console.log(`server is running on port : ${port}`);
 }
